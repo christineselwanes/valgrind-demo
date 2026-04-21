@@ -44,29 +44,26 @@ void freeList(Node* head) {
 }
 
 int main() {
-  Node* list = createList(5);
+    Node* list = createList(5);
 
-  printList(list);
+    printList(list);
 
-  freeList(list);
+    cout << list->value << endl;  
 
-  cout << list->value << endl;
+    freeList(list);               
 
-  freeList(list);
+    Node* leakNode = new Node;
+    leakNode->value = 99;
+    leakNode->next = nullptr;
+    cout << leakNode->value << endl;
+    delete leakNode;              
 
-  Node* leakNode = new Node;
-  leakNode->value = 99;
-  leakNode->next = nullptr;
+    int* arr = new int[3];
+    arr[0] = 1;
+    arr[1] = 2;
+    arr[2] = 3;
+                                 
+    delete[] arr;
 
-  cout << leakNode->value << endl;
-
-  int* arr = new int[3];
-  arr[0] = 1;
-  arr[1] = 2;
-  arr[2] = 3;
-  arr[5] = 999;
-
-  delete[] arr;
-
-  return 0;
+    return 0;
 }
